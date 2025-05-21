@@ -1,4 +1,5 @@
 import "./App.css";
+import WoodCalc from "./components/WoodCalc.jsx";
 import { Box, createTheme, TextField, ThemeProvider } from "@mui/material";
 
 function App() {
@@ -9,37 +10,9 @@ function App() {
     },
   });
 
-  const woodSettings = [
-    {
-      id: "weight",
-      label: "Vekt (kg)",
-      val: 0,
-    },
-    {
-      id: "humidity",
-      label: "Fuktighet",
-      val: 0,
-    },
-    {
-      id: "price",
-      label: "Pris",
-      val: 0,
-    },
-  ];
-
   return (
     <ThemeProvider theme={theme}>
-      <div>Hello World</div>
-      <Box
-        component="form"
-        sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
-        noValidate
-        autoComplete="off"
-      >
-        {woodSettings.map((x) => {
-          return <TextField id={x.id} label={x.label} />;
-        })}
-      </Box>
+      <WoodCalc />
     </ThemeProvider>
   );
 }
