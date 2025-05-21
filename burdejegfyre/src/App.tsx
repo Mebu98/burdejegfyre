@@ -1,10 +1,14 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
-import { Box, TextField } from "@mui/material";
+import { Box, createTheme, TextField, ThemeProvider } from "@mui/material";
 
 function App() {
+  const theme = createTheme({
+    colorSchemes: {
+      dark: true,
+      light: true,
+    },
+  });
+
   const woodSettings = [
     {
       id: "weight",
@@ -24,7 +28,7 @@ function App() {
   ];
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <div>Hello World</div>
       <Box
         component="form"
@@ -36,7 +40,7 @@ function App() {
           return <TextField id={x.id} label={x.label} />;
         })}
       </Box>
-    </>
+    </ThemeProvider>
   );
 }
 
