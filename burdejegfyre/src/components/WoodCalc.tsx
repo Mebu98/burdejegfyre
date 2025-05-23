@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, TextField, InputAdornment } from "@mui/material";
 
 const woodSettings = [
   {
     id: "weight",
     label: "Vekt (kilo)",
-    val: 0,
+    val: 15,
     endAdornment: "kg",
   },
   {
@@ -23,22 +23,39 @@ const woodSettings = [
   {
     id: "price",
     label: "Pris",
-    val: 0,
+    val: 100,
     endAdornment: "kr",
   },
 ];
 
-// Formula from https://nn.wikipedia.org/wiki/Brennverdi
+// Formula from: https://nn.wikipedia.org/wiki/Brennverdi
 // Default moisture of 20%
 function calcKwhKg(moisture = 20) {
   let kwhKg = 5.32 - 0.06 * moisture;
-  return kwhKg.toFixed(2);
+  return Number(kwhKg.toFixed(2));
+}
+
+function calcNokKwh(kwhKg = 4.3, nokKg = 100 / 15) {
+  console.log(kwhKg, nokKg);
+  return Number((nokKg / kwhKg).toFixed(2));
 }
 
 function WoodCalc() {
+  const [kwhKg, setKwhKg] = useState(0);
+  const [nokKwh, setNokKwh] = useState(0);
+
   // Not really optimal way to set initial settings, but changing it might need some refactoring of woodSettings...
-  let moisture = woodSettings?.find((n) => n.id === "moisture")?.val;
-  const [kwhKg, setKwhKg] = useState(calcKwhKg(moisture));
+  function runCalcs() {
+    let moisture = woodSettings?.find((n) => n.id === "moisture")?.val || 20;
+    let weight = woodSettings?.find((n) => n.id === "weight")?.val || 15;
+    let price = woodSettings?.find((n) => n.id === "price")?.val || 100;
+    let pendingKwhKg = calcKwhKg(moisture);
+    setKwhKg(pendingKwhKg);
+    setNokKwh(calcNokKwh(pendingKwhKg, price / weight));
+  }
+  useEffect(() => {
+    runCalcs();
+  }, []);
   return (
     <div>
       <Box
@@ -67,10 +84,7 @@ function WoodCalc() {
               }}
               onChange={(e) => {
                 x.val = Number(e.target.value);
-                let moisture = woodSettings?.find(
-                  (n) => n.id === "moisture",
-                )?.val;
-                setKwhKg(calcKwhKg(moisture));
+                runCalcs();
                 setNum(Number(e.target.value));
               }}
             />
@@ -78,6 +92,7 @@ function WoodCalc() {
         })}
       </Box>
       <p>KWh / kg: {kwhKg}</p>
+      <p> NOK / KWh: {nokKwh}</p>
     </div>
   );
 }
