@@ -35,9 +35,9 @@ function calcKwhKg(moisture = 20) {
   return Number(kwhKg.toFixed(2));
 }
 
-function calcNokKwh(kwhKg = 4.3, nokKg = 100 / 15) {
-  console.log(kwhKg, nokKg);
-  return Number((nokKg / kwhKg).toFixed(2));
+function calcNokKwh(kwhKg = 4.3, nokKg = 100 / 15, efficiency = 70) {
+  let nokKwh = nokKg / (kwhKg * (efficiency * 0.01));
+  return Number(nokKwh.toFixed(2));
 }
 
 function WoodCalc() {
@@ -49,9 +49,11 @@ function WoodCalc() {
     let moisture = woodSettings?.find((n) => n.id === "moisture")?.val || 20;
     let weight = woodSettings?.find((n) => n.id === "weight")?.val || 15;
     let price = woodSettings?.find((n) => n.id === "price")?.val || 100;
+    let efficiency =
+      woodSettings?.find((n) => n.id === "efficiency")?.val || 100;
     let pendingKwhKg = calcKwhKg(moisture);
     setKwhKg(pendingKwhKg);
-    setNokKwh(calcNokKwh(pendingKwhKg, price / weight));
+    setNokKwh(calcNokKwh(pendingKwhKg, price / weight, efficiency));
   }
   useEffect(() => {
     runCalcs();
