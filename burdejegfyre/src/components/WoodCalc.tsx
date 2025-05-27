@@ -1,6 +1,6 @@
-import { use, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, TextField, InputAdornment } from "@mui/material";
-import { NokKwhContext, useNokKwhContext } from "../contexts/NokKwhContext";
+import { useNokKwhContext } from "../contexts/NokKwhContext";
 
 const woodSettings = [
   {
