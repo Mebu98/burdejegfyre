@@ -94,6 +94,36 @@ const WoodCalc: React.FC = () => {
           );
         })}
       </Box>
+      <details style={{ maxWidth: "33vw", margin: "auto" }}>
+        <summary>Hvordan bruke kalkulatoren.</summary>
+        <h3>Eksempel situasjon</h3>
+        <p>
+          En har kjøpt førti 15kg bjørkeved poser med 20% fuktighet til 100 kr
+          per pose.
+        </p>
+        <h3>Vekt</h3>
+        <p>
+          I dette feltet skal man fylle ut vekt per enhet av det du har kjøpt. I
+          dette eksmepelet vil det være 15kg.
+        </p>
+        <h3>Fuktighet</h3>
+        <p>
+          Fuktigheten, det burde stå et estimat på informasjonslappen til veden.
+          Hvis man er usikker er 20% et vanlig fuktighetsnivå for ved kjøpt i
+          Norge.
+        </p>
+        <h3>Peisovn virkningsgrad</h3>
+        <p>
+          I dette feltet skal man fylle ut virkningsgraden til peisovnen din,
+          hvis du er usikker kan du bruke estimater nedenfor. <br /> Hvis ovnen
+          er åpen er virkningsgraden ofte mellom 20 og 40%. Hvis ovnen ikke er
+          rentbrennende (ofte de før 1998), så har den ofte en virkningsgrad på
+          40%. Hvis den er etter 1998 så vil den nok være nærmere 80%.
+        </p>
+        <h3>Pris</h3>
+        <p>Dette vil være pris per "enhet". I dette eksempelet 100kr.</p>
+      </details>
+
       <p>KWh / kg: {kwhKg}</p>
       <p> NOK / KWh: {nokKwh}</p>
     </div>
