@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { Box, TextField, InputAdornment } from "@mui/material";
+import { NokKwhContext, useNokKwhContext } from "../contexts/NokKwhContext";
 
 const woodSettings = [
   {
@@ -40,9 +41,9 @@ function calcNokKwh(kwhKg = 4.3, nokKg = 100 / 15, efficiency = 70) {
   return Number(nokKwh.toFixed(2));
 }
 
-function WoodCalc() {
+const WoodCalc: React.FC = () => {
   const [kwhKg, setKwhKg] = useState(0);
-  const [nokKwh, setNokKwh] = useState(0);
+  const { nokKwh, setNokKwh } = useNokKwhContext();
 
   // Not really optimal way to set initial settings, but changing it might need some refactoring of woodSettings...
   function runCalcs() {
@@ -97,6 +98,6 @@ function WoodCalc() {
       <p> NOK / KWh: {nokKwh}</p>
     </div>
   );
-}
+};
 
 export default WoodCalc;

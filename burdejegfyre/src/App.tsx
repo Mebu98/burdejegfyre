@@ -1,6 +1,8 @@
 import "./App.css";
 import WoodCalc from "./components/WoodCalc.tsx";
-import { Box, createTheme, TextField, ThemeProvider } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
+import ContextProvider from "./contexts/NokKwhContext.tsx";
+import GlobalTest from "./components/GlobalTest.tsx";
 
 function App() {
   const theme = createTheme({
@@ -12,7 +14,10 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <WoodCalc />
+      <ContextProvider>
+        <WoodCalc />
+        <GlobalTest />
+      </ContextProvider>
     </ThemeProvider>
   );
 }
