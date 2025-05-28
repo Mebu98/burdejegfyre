@@ -37,13 +37,13 @@ function calcKwhKg(moisture = 20) {
 }
 
 function calcWoodNokKwh(kwhKg = 4.3, nokKg = 100 / 15, efficiency = 70) {
-  let woodWoodNokKwh = nokKg / (kwhKg * (efficiency * 0.01));
-  return Number(woodWoodNokKwh.toFixed(2));
+  let woodNokKwh = nokKg / (kwhKg * (efficiency * 0.01));
+  return Number(woodNokKwh.toFixed(2));
 }
 
 const WoodCalc: React.FC = () => {
   const [kwhKg, setKwhKg] = useState(0);
-  const { woodWoodNokKwh, setWoodNokKwh } = useWoodNokKwhContext();
+  const { woodNokKwh, setWoodNokKwh } = useWoodNokKwhContext();
 
   // Not really optimal way to set initial settings, but changing it might need some refactoring of woodSettings...
   function runCalcs() {
@@ -129,8 +129,8 @@ const WoodCalc: React.FC = () => {
         <p>Dette vil være pris per "enhet". I dette eksempelet 100kr.</p>
       </details>
 
-      <p>KWh / kg: {kwhKg}</p>
-      <p> NOK / KWh: {woodWoodNokKwh}</p>
+      <p>KWh / kg ved: {kwhKg}</p>
+      <p> Effektiv NOK / kWh for oppvarming: {woodNokKwh}</p>
     </div>
   );
 };

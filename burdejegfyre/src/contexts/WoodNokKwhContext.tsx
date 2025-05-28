@@ -8,7 +8,7 @@ import {
 } from "react";
 
 type WoodNokKwhContextType = {
-  woodWoodNokKwh: number;
+  woodNokKwh: number;
   setWoodNokKwh: Dispatch<SetStateAction<number>>;
 };
 
@@ -21,8 +21,8 @@ type ContextProviderProps = {
 };
 
 export default function ContextProvider({ children }: ContextProviderProps) {
-  const [woodWoodNokKwh, setWoodNokKwh] = useState(1);
-  const context: WoodNokKwhContextType = { setWoodNokKwh, woodWoodNokKwh };
+  const [woodNokKwh, setWoodNokKwh] = useState(1);
+  const context: WoodNokKwhContextType = { setWoodNokKwh, woodNokKwh };
   return (
     <WoodNokKwhContext.Provider value={context}>
       {children}

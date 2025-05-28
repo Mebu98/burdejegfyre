@@ -51,49 +51,65 @@ const ElectricityChart = () => {
   };
 
   return (
-    <div>
-      <FormControl>
-        <InputLabel>Region</InputLabel>
-        <Select
-          label={"Region"}
-          defaultValue={"NO1"}
-          onChange={handleRegionUpdate}
-        >
-          <MenuItem value={"NO1"}>NO1 Østnorge</MenuItem>
-          <MenuItem value={"NO2"}>NO2 Sørnorge</MenuItem>
-          <MenuItem value={"NO3"}>NO3 Midtnorge</MenuItem>
-          <MenuItem value={"NO4"}>NO4 Nordnorge</MenuItem>
-          <MenuItem value={"NO5"}>NO5 Vestnorge</MenuItem>
-        </Select>
-      </FormControl>
-      <LineChart
-        dataset={parsedData}
-        xAxis={[
-          {
-            dataKey: "time_start",
-            scaleType: "utc",
-            valueFormatter: (timestamp) => {
-              let start = dayjs(timestamp).format("HH");
-              let end = dayjs(timestamp).add(1, "h").format("HH");
-              return start + "-" + end;
+    <>
+      <p>Graf over strømpriser i dag (med 25% mva, uten nettleie)</p>
+      <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+        <div>
+          <FormControl>
+            <InputLabel>Region</InputLabel>
+            <Select
+              label={"Region"}
+              defaultValue={"NO1"}
+              onChange={handleRegionUpdate}
+            >
+              <MenuItem value={"NO1"}>NO1 Østnorge</MenuItem>
+              <MenuItem value={"NO2"}>NO2 Sørnorge</MenuItem>
+              <MenuItem value={"NO3"}>NO3 Midtnorge</MenuItem>
+              <MenuItem value={"NO4"}>NO4 Nordnorge</MenuItem>
+              <MenuItem value={"NO5"}>NO5 Vestnorge</MenuItem>
+            </Select>
+          </FormControl>
+          <p>
+            <a href="https://www.hvakosterstrommen.no">
+              <img
+                src="https://i.bnfcl.io/hva-koster-strommen/strompriser-levert-av-hvakosterstrommen_oTtWvqeiB.png"
+                alt="Strømpriser levert av Hva koster strømmen.no"
+                width="200"
+                height="45"
+              />
+            </a>
+          </p>
+        </div>
+        <LineChart
+          dataset={parsedData}
+          xAxis={[
+            {
+              dataKey: "time_start",
+              scaleType: "utc",
+              valueFormatter: (timestamp) => {
+                let start = dayjs(timestamp).format("HH");
+                let end = dayjs(timestamp).add(1, "h").format("HH");
+                return start + "-" + end;
+              },
             },
-          },
-        ]}
-        series={[{ dataKey: "NOK_per_kWh" }]}
-        grid={{ vertical: true, horizontal: true }}
-        sx={{
-          ".MuiLineElement-root": {
-            strokeWidth: 3,
-          },
-          ".MuiXAxis-tick line": {
-            stroke: "grey",
-          },
-          ".MuiYAxis-tick line": {
-            stroke: "grey",
-          },
-        }}
-      ></LineChart>
-    </div>
+          ]}
+          yAxis={[{}]}
+          series={[{ dataKey: "NOK_per_kWh" }]}
+          grid={{ vertical: true, horizontal: true }}
+          sx={{
+            ".MuiLineElement-root": {
+              strokeWidth: 3,
+            },
+            ".MuiXAxis-tick line": {
+              stroke: "grey",
+            },
+            ".MuiYAxis-tick line": {
+              stroke: "grey",
+            },
+          }}
+        ></LineChart>
+      </div>
+    </>
   );
 };
 
