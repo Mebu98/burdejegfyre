@@ -1,7 +1,3 @@
 <h1>Burde jeg fyre?</h1>
 
-<h2>Notater</h2>
-<ul>
-  <li>https://www.hvakosterstrommen.no/strompris-api</li>
-  <li>https://www.norskved.no/det-nye-omsetningssystemet</li>
-</ul>
+<p>Burdejegfyre er et lite hobbyprosjekt med formål å informere brukeren om det er bedre for lommeboka å fyre opp ved i peisovn, avhengig av en rekke faktorer, eller bruke panelovn / andre oppvarmingsenheter.</p>
