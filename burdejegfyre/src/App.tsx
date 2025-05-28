@@ -1,7 +1,8 @@
 import "./App.css";
 import WoodCalc from "./components/WoodCalc.tsx";
+import ElectricityChart from "./components/ElectricityChart.tsx";
 import { createTheme, ThemeProvider } from "@mui/material";
-import ContextProvider from "./contexts/NokKwhContext.tsx";
+import ContextProvider from "./contexts/WoodNokKwhContext.tsx";
 
 function App() {
   const theme = createTheme({
@@ -15,6 +16,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <ContextProvider>
         <WoodCalc />
+        <ElectricityChart />
       </ContextProvider>
     </ThemeProvider>
   );

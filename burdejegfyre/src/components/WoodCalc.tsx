@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Box, TextField, InputAdornment } from "@mui/material";
-import { useNokKwhContext } from "../contexts/NokKwhContext";
+import { useWoodNokKwhContext } from "../contexts/WoodNokKwhContext";
 
 const woodSettings = [
   {
@@ -36,14 +36,14 @@ function calcKwhKg(moisture = 20) {
   return Number(kwhKg.toFixed(2));
 }
 
-function calcNokKwh(kwhKg = 4.3, nokKg = 100 / 15, efficiency = 70) {
-  let nokKwh = nokKg / (kwhKg * (efficiency * 0.01));
-  return Number(nokKwh.toFixed(2));
+function calcWoodNokKwh(kwhKg = 4.3, nokKg = 100 / 15, efficiency = 70) {
+  let woodWoodNokKwh = nokKg / (kwhKg * (efficiency * 0.01));
+  return Number(woodWoodNokKwh.toFixed(2));
 }
 
 const WoodCalc: React.FC = () => {
   const [kwhKg, setKwhKg] = useState(0);
-  const { nokKwh, setNokKwh } = useNokKwhContext();
+  const { woodWoodNokKwh, setWoodNokKwh } = useWoodNokKwhContext();
 
   // Not really optimal way to set initial settings, but changing it might need some refactoring of woodSettings...
   function runCalcs() {
@@ -54,7 +54,7 @@ const WoodCalc: React.FC = () => {
       woodSettings?.find((n) => n.id === "efficiency")?.val || 100;
     let pendingKwhKg = calcKwhKg(moisture);
     setKwhKg(pendingKwhKg);
-    setNokKwh(calcNokKwh(pendingKwhKg, price / weight, efficiency));
+    setWoodNokKwh(calcWoodNokKwh(pendingKwhKg, price / weight, efficiency));
   }
   useEffect(() => {
     runCalcs();
@@ -94,7 +94,12 @@ const WoodCalc: React.FC = () => {
           );
         })}
       </Box>
-      <details style={{ maxWidth: "33vw", margin: "auto" }}>
+      <details
+        style={{
+          maxWidth: "33vw",
+          margin: "auto",
+        }}
+      >
         <summary>Hvordan bruke kalkulatoren.</summary>
         <h3>Eksempel situasjon</h3>
         <p>
@@ -125,7 +130,7 @@ const WoodCalc: React.FC = () => {
       </details>
 
       <p>KWh / kg: {kwhKg}</p>
-      <p> NOK / KWh: {nokKwh}</p>
+      <p> NOK / KWh: {woodWoodNokKwh}</p>
     </div>
   );
 };
