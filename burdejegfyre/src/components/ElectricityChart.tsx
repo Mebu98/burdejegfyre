@@ -20,8 +20,6 @@ const ElectricityChart = () => {
     year: today.getFullYear(),
   };
 
-  console.log(date);
-
   useEffect(() => {
     axios
       .get(
@@ -33,18 +31,20 @@ const ElectricityChart = () => {
       .catch((error) => {
         console.warn(error);
       });
-  }, [region]);
+  }, [region, date.day, date.month, date.year]);
 
-  function isoToUtc(isoString: any): string {
+  function isoToUtc(isoString: string): string {
     const date = new Date(isoString);
     return date.toISOString();
   }
 
   const mva = 1.25;
-  const parsedData = data.map((item: any) => ({
-    time_start: new Date(isoToUtc(item.time_start)),
-    NOK_per_kWh: item.NOK_per_kWh * mva,
-  }));
+  const parsedData = data.map(
+    (item: { time_start: string; NOK_per_kWh: number }) => ({
+      time_start: new Date(isoToUtc(item.time_start)),
+      NOK_per_kWh: item.NOK_per_kWh * mva,
+    }),
+  );
 
   const handleRegionUpdate = (event: SelectChangeEvent) => {
     setRegion(event.target.value as string);
@@ -52,7 +52,10 @@ const ElectricityChart = () => {
 
   return (
     <>
-      <p>Graf over strømpriser i dag (med 25% mva, uten nettleie)</p>
+      <p>
+        Graf over strømpriser i dag ({date.day}/{date.month}/{date.year}) med
+        25% mva, uten nettleie.
+      </p>
       <div style={{ display: "flex", flexDirection: "row-reverse" }}>
         <div>
           <FormControl>
@@ -87,8 +90,8 @@ const ElectricityChart = () => {
               dataKey: "time_start",
               scaleType: "utc",
               valueFormatter: (timestamp) => {
-                let start = dayjs(timestamp).format("HH");
-                let end = dayjs(timestamp).add(1, "h").format("HH");
+                const start = dayjs(timestamp).format("HH");
+                const end = dayjs(timestamp).add(1, "h").format("HH");
                 return start + "-" + end;
               },
             },

@@ -12,7 +12,7 @@ type WoodNokKwhContextType = {
   setWoodNokKwh: Dispatch<SetStateAction<number>>;
 };
 
-export const WoodNokKwhContext = createContext<WoodNokKwhContextType>(
+const WoodNokKwhContext = createContext<WoodNokKwhContextType>(
   {} as WoodNokKwhContextType,
 );
 

@@ -32,12 +32,12 @@ const woodSettings = [
 // Formula from: https://nn.wikipedia.org/wiki/Brennverdi
 // Default moisture of 20%
 function calcKwhKg(moisture = 20) {
-  let kwhKg = 5.32 - 0.06 * moisture;
+  const kwhKg = 5.32 - 0.06 * moisture;
   return Number(kwhKg.toFixed(2));
 }
 
 function calcWoodNokKwh(kwhKg = 4.3, nokKg = 100 / 15, efficiency = 70) {
-  let woodNokKwh = nokKg / (kwhKg * (efficiency * 0.01));
+  const woodNokKwh = nokKg / (kwhKg * (efficiency * 0.01));
   return Number(woodNokKwh.toFixed(2));
 }
 
@@ -47,18 +47,18 @@ const WoodCalc: React.FC = () => {
 
   // Not really optimal way to set initial settings, but changing it might need some refactoring of woodSettings...
   function runCalcs() {
-    let moisture = woodSettings?.find((n) => n.id === "moisture")?.val || 20;
-    let weight = woodSettings?.find((n) => n.id === "weight")?.val || 15;
-    let price = woodSettings?.find((n) => n.id === "price")?.val || 100;
-    let efficiency =
+    const moisture = woodSettings?.find((n) => n.id === "moisture")?.val || 20;
+    const weight = woodSettings?.find((n) => n.id === "weight")?.val || 15;
+    const price = woodSettings?.find((n) => n.id === "price")?.val || 100;
+    const efficiency =
       woodSettings?.find((n) => n.id === "efficiency")?.val || 100;
-    let pendingKwhKg = calcKwhKg(moisture);
+    const pendingKwhKg = calcKwhKg(moisture);
     setKwhKg(pendingKwhKg);
     setWoodNokKwh(calcWoodNokKwh(pendingKwhKg, price / weight, efficiency));
   }
   useEffect(() => {
     runCalcs();
-  }, []);
+  });
   return (
     <div>
       <Box
@@ -68,7 +68,7 @@ const WoodCalc: React.FC = () => {
         autoComplete="off"
       >
         {woodSettings.map((x) => {
-          const [num, setNum] = useState(x.val);
+          let num = x.val;
           return (
             <TextField
               key={x.id}
@@ -88,7 +88,7 @@ const WoodCalc: React.FC = () => {
               onChange={(e) => {
                 x.val = Number(e.target.value);
                 runCalcs();
-                setNum(Number(e.target.value));
+                num = Number(e.target.value);
               }}
             />
           );
