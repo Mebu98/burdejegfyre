@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Box, TextField, InputAdornment } from "@mui/material";
 import { useWoodNokKwhContext } from "../contexts/WoodNokKwhContext";
 
@@ -42,7 +42,7 @@ function calcWoodNokKwh(kwhKg = 4.3, nokKg = 100 / 15, efficiency = 70) {
 }
 
 const WoodCalc: React.FC = () => {
-  const [kwhKg, setKwhKg] = useState(0);
+  //const [kwhKg, setKwhKg] = useState(0);
   const { woodNokKwh, setWoodNokKwh } = useWoodNokKwhContext();
 
   // Not really optimal way to set initial settings, but changing it might need some refactoring of woodSettings...
@@ -53,7 +53,7 @@ const WoodCalc: React.FC = () => {
     const efficiency =
       woodSettings?.find((n) => n.id === "efficiency")?.val || 100;
     const pendingKwhKg = calcKwhKg(moisture);
-    setKwhKg(pendingKwhKg);
+    //setKwhKg(pendingKwhKg);
     setWoodNokKwh(calcWoodNokKwh(pendingKwhKg, price / weight, efficiency));
   }
   useEffect(() => {
