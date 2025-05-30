@@ -53,8 +53,8 @@ const ElectricityChart = () => {
   return (
     <>
       <p>
-        Graf over strømpriser i dag ({date.day}/{date.month}/{date.year}) med
-        25% mva, uten nettleie.
+        Graf over strømpriser dag ({date.day}/{date.month}/{date.year}) med 25%
+        mva, uten nettleie og uten strømstøtte.
       </p>
       <div style={{ display: "flex", flexDirection: "row-reverse" }}>
         <div>
@@ -89,15 +89,23 @@ const ElectricityChart = () => {
             {
               dataKey: "time_start",
               scaleType: "utc",
-              valueFormatter: (timestamp) => {
+              valueFormatter: (timestamp: string) => {
                 const start = dayjs(timestamp).format("HH");
                 const end = dayjs(timestamp).add(1, "h").format("HH");
                 return start + "-" + end;
               },
             },
           ]}
-          yAxis={[{}]}
-          series={[{ dataKey: "NOK_per_kWh" }]}
+          yAxis={[
+            {
+              dataKey: "NOK_per_kWh",
+            },
+          ]}
+          series={[
+            {
+              dataKey: "NOK_per_kWh",
+            },
+          ]}
           grid={{ vertical: true, horizontal: true }}
           sx={{
             ".MuiLineElement-root": {

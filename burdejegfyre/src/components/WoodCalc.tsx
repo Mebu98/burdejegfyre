@@ -129,7 +129,6 @@ const WoodCalc: React.FC = () => {
         <p>Dette vil være pris per "enhet". I dette eksempelet 100kr.</p>
       </details>
 
-      <p>KWh / kg ved: {kwhKg}</p>
       <p> Effektiv NOK / kWh for oppvarming: {woodNokKwh}</p>
     </div>
   );

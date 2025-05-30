@@ -12,5 +12,7 @@
   <li>[ ] Legge til pris av ved som et referansepunkt på grafen, samt fargekode</li>
   <li>[ ] Fikse favicon (logo? Har ingen enda da...) og title</li>
   <li>[ ] Lagre "settings" til cookie slik at bruker ikke trenger å skrive det inn flere ganger</li>
+  <li>[ ] Mulighet for strømstøtte på grafen?</li>
+  <li>[ ] Gjøre om fra NOK til Øre</li>
   <li>[ ] Sikkert mye mer :^)</li>
 </ul>
